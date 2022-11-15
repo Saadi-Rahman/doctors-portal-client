@@ -4,15 +4,17 @@ import Exceptional from '../Exceptional/Exceptional';
 import InfoCards from '../InfoCards/InfoCards';
 import MakeAppoinment from '../MakeAppoinment/MakeAppoinment';
 import Services from '../Services/Services';
+import Testimonial from '../Testimonial/Testimonial';
 
 const Home = () => {
     return (
-        <div className='mx-5'>
+        <div>
             <Banner></Banner>
             <InfoCards></InfoCards>
             <Services></Services>
             <Exceptional></Exceptional>
             <MakeAppoinment></MakeAppoinment>
+            <Testimonial></Testimonial>
         </div>
     );
 };
