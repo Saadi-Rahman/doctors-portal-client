@@ -7,7 +7,7 @@ const MakeAppoinment = () => {
     return (
         <section style={{backgroundImage: `url(${appoinment})`, height: 'auto'}}>
             <div className="hero">
-                <div className="hero-content flex-col lg:flex-row gap-6 py-6 lg:pb-0">
+                <div className="hero-content flex-col lg:flex-row gap-6 py-12 lg:py-6 lg:pb-0">
                     <div className="">
                         <img src={doctor1} className="-mt-24 hidden lg:block" alt=''/>
                     </div>
