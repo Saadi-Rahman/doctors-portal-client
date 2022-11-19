@@ -1,11 +1,32 @@
-import React from 'react';
+import React, { useContext, useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { Link } from 'react-router-dom';
+import toast from 'react-hot-toast';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { AuthContext } from '../../contexts/AuthProvider';
 
 const Login = () => {
     const {register, formState: { errors }, handleSubmit} = useForm();
+    const {login} = useContext(AuthContext);
+    const [loginError, setLoginError] = useState('');
+    const location = useLocation();
+    const navigate = useNavigate();
+
+    const form = location.state?.from?.pathname || "/";
+
     const handleLogin = data => {
         console.log(data);
+        setLoginError("");
+        login(data.email, data.password)
+        .then(result => {
+            const user = result.user;
+            console.log(user);
+            toast.success('Successfully Logged in!');
+            navigate(form, {replace: true});
+        })
+        .catch(error => {
+            console.log(error.message)
+            setLoginError(error.message)
+        });
     }
 
     return (
@@ -34,6 +55,7 @@ const Login = () => {
                                 })} 
                             />
                             {errors.password && <small className='text-red-500'>{errors.password?.message}</small>}
+                            {loginError && <small className='text-red-500'>{loginError}</small>}
                         </div>
 
                         <label className="label">
