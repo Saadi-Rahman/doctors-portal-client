@@ -5,7 +5,6 @@ import { Link } from 'react-router-dom';
 import { AuthContext } from '../../contexts/AuthProvider';
 
 const SignUp = () => {
-
     const {register, formState: {errors}, handleSubmit} = useForm();
     const {createUser, updateUser} = useContext(AuthContext);
     const [signUpError, setSignUpError] = useState('');
@@ -81,11 +80,11 @@ const SignUp = () => {
                         </label>
                     </form>
 
-                    <div className="divider my-0">OR</div>
+                    {/* <div className="divider my-0">OR</div>
 
                     <div className="form-control mt-2">
                         <button className="btn btn-outline btn-accent">Continue with Google</button>
-                    </div>
+                    </div> */}
                 </div>
             </div>
         </div>
