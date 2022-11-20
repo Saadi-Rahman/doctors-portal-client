@@ -12,7 +12,7 @@ const Login = () => {
     const location = useLocation();
     const navigate = useNavigate();
 
-    const form = location.state?.from?.pathname || "/";
+    const from = location.state?.from?.pathname || "/";
 
     const googleProvider = new GoogleAuthProvider();
 
@@ -22,7 +22,7 @@ const Login = () => {
             const user = result.user;
             console.log(user);
             toast.success('Login Success!!');
-            navigate(form, {replace: true});
+            navigate(from, {replace: true});
         })
         .catch(error => console.error(error));
     }
@@ -35,7 +35,7 @@ const Login = () => {
             const user = result.user;
             console.log(user);
             toast.success('Successfully Logged in!');
-            navigate(form, {replace: true});
+            navigate(from, {replace: true});
         })
         .catch(error => {
             console.log(error.message)
