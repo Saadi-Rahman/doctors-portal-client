@@ -1,15 +1,33 @@
 import { useQuery } from '@tanstack/react-query';
 import React from 'react';
+import toast from 'react-hot-toast';
 
 const AllUsers = () => {
-    const {data: users = []} = useQuery({
+    const {data: users = [], refetch} = useQuery({
         queryKey: ['users'],
         queryFn: async() =>{
             const res = await fetch('http://localhost:5000/users');
             const data = await res.json();
             return data;
         }
-    })
+    });
+
+    const handleMakeAdmin = id => {
+        fetch(`http://localhost:5000/users/admin/${id}`, {
+            method: 'PUT',
+            headers: {
+                authorization: `bearer ${localStorage.getItem('accessToken')}`
+            }
+        })
+        .then(res => res.json())
+        .then(data => {
+            if(data.modifiedCount > 0) {
+                toast.success('Make Admin Successful!');
+                refetch();
+            }
+        })
+    }
+
     return (
         <div>
             <h3 className='text-2xl font-semibold my-5'>All Users</h3>
@@ -20,8 +38,8 @@ const AllUsers = () => {
                         <th></th>
                         <th>Name</th>
                         <th>Email</th>
-                        <th>Date</th>
-                        <th>Time</th>
+                        <th>Admin</th>
+                        <th>Delete</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -30,8 +48,8 @@ const AllUsers = () => {
                                 <th>{i+1}</th>
                                 <td>{user.name}</td>
                                 <td>{user.email}</td>
-                                <td>Red</td>
-                                <td>Green</td>
+                                <td>{user?.role !== 'admin' && <button onClick={() => handleMakeAdmin(user._id)} className='btn btn-xs btn-outline btn-primary'>Make Admin</button>}</td>
+                                <td><button className='btn btn-xs btn-outline btn-error'>Delete</button></td>
                             </tr>)
                         }
                     </tbody>
