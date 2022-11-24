@@ -30,7 +30,7 @@ const AllUsers = () => {
 
     return (
         <div>
-            <h3 className='text-2xl font-semibold my-5'>All Users</h3>
+            <h3 className='text-2xl font-semibold my-5'>All Users: {users.length}</h3>
             <div className="overflow-x-auto">
                 <table className="table w-full">
                     <thead>
@@ -39,7 +39,7 @@ const AllUsers = () => {
                         <th>Name</th>
                         <th>Email</th>
                         <th>Admin</th>
-                        <th>Delete</th>
+                        <th>Action</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -49,7 +49,7 @@ const AllUsers = () => {
                                 <td>{user.name}</td>
                                 <td>{user.email}</td>
                                 <td>{user?.role !== 'admin' && <button onClick={() => handleMakeAdmin(user._id)} className='btn btn-xs btn-outline btn-primary'>Make Admin</button>}</td>
-                                <td><button className='btn btn-xs btn-outline btn-error'>Action</button></td>
+                                <td><button className='btn btn-xs btn-outline btn-error'>Remove User</button></td>
                             </tr>)
                         }
                     </tbody>

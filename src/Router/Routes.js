@@ -8,6 +8,7 @@ import ManageDoctors from "../Pages/Dashboard/ManageDoctors/ManageDoctors";
 import MyAppointment from "../Pages/Dashboard/MyAppointment/MyAppointment";
 import Home from "../Pages/Home/Home/Home";
 import Login from "../Pages/Login/Login";
+import NotFoundRoute from "../Pages/Shared/NotFoundRoute/NotFoundRoute";
 import SignUp from "../Pages/SignUp/SignUp";
 import AdminRoute from "./AdminRoute";
 import PrivateRoute from "./PrivateRoute";
@@ -56,7 +57,11 @@ const router = createBrowserRouter([
                 element: <AdminRoute><ManageDoctors></ManageDoctors></AdminRoute>
             },
         ]
-    }
+    },
+    {
+        path: '*',
+        element: <NotFoundRoute></NotFoundRoute>
+      }
 ])
 
 export default router;
